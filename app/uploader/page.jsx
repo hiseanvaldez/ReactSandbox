@@ -28,35 +28,36 @@ const Uploader = () => {
     };
   }, [image]);
 
+  const handleEvents = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   const handleClick = () => {
     setError("");
     inputRef.current?.click();
   };
 
   const handleDragEnter = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    handleEvents(e);
     setDragging(true);
     setError("");
   };
 
   const handleDragLeave = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    handleEvents(e);
     setDragging(false);
     setError("");
   };
 
   const handleDragOver = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    handleEvents(e);
     setDragging(true);
     setError("");
   };
 
   const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    handleEvents(e);
     setDragging(false);
     setError("");
 
