@@ -9,7 +9,6 @@ import { convertSizeUnit } from "../utils/imageUtils";
 const Uploader = () => {
   const imageFormats = ["jpeg", "jpg", "png"];
   const maxFiles = 1;
-  const reader = new FileReader();
   const inputRef = useRef(null);
 
   const [dragging, setDragging] = useState(false);
@@ -22,11 +21,12 @@ const Uploader = () => {
       return;
     }
 
+    const reader = new FileReader();
     reader.readAsDataURL(image);
     reader.onloadend = (e) => {
       setImageBase64(e.target.result);
     };
-  }, [image, reader]);
+  }, [image]);
 
   const handleClick = () => {
     setError("");
