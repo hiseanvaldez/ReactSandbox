@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BsTrash } from "react-icons/bs";
+import { BsDownload, BsTrash } from "react-icons/bs";
 import Button from "../components/Button";
 import Container from "../components/Container";
 import { convertSizeUnit } from "../utils/imageUtils";
@@ -152,6 +152,7 @@ const Uploader = () => {
           ${error ? "border-red-600" : "border-blue-600"}
         `}
         >
+          <BsDownload size={40} />
           <p>Drag your image here.</p>
           <p>or</p>
           <Button label="Select a file" onClick={handleClick} />
@@ -167,10 +168,10 @@ const Uploader = () => {
                 setImageBase64();
               }}
             >
-              <BsTrash size={20} color="red" />
+              <BsTrash size={24} color="red" />
             </button>
             <p>{image?.name}</p>
-            <p>{convertSizeUnit(image?.size)}</p>
+            <p>({convertSizeUnit(image?.size)})</p>
           </div>
         </div>
       )}
