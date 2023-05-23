@@ -1,43 +1,67 @@
 "use client";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import {
   AiFillHome,
+  AiOutlineGithub,
   AiOutlineMenuFold,
   AiOutlineMenuUnfold,
 } from "react-icons/ai";
+import MenuItem from "./MenuItem";
+
+const items = [
+  {
+    title: "Image Uploader",
+    route: "/uploader",
+  },
+];
 
 const Sidebar = ({ children }) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className="flex w-full flex-row">
       <div
         className={`
+          flex 
           shrink-0
-          overflow-x-hidden
+          cursor-pointer
+          flex-col
+          justify-between
           bg-nav-blue
           text-white
           shadow-lg
           transition-all
           duration-500
           ease-in-out
-          ${isOpen ? "w-[300px]" : "w-16"}
+          ${isOpen ? "w-[300px]" : "w-0"}
         `}
       >
-        <div
-          className={`m-4 flex h-16 flex-row items-center ${
-            !isOpen && " justify-center"
-          }`}
-        >
-          <div
-            className={`transition-all  ${
-              isOpen ? "rotate-180 scale-0" : "scale-100 "
-            }`}
+        <div>
+          <button
+            className="m-4 flex flex-row items-center gap-2"
+            onClick={() => router.push("/")}
           >
             <AiFillHome size={24} />
+            <p className={`truncate text-2xl font-semibold`}>React Sandbox</p>
+          </button>
+          <div className="my-4 flex flex-col justify-center">
+            {items.map((item, idx) => (
+              <MenuItem key={idx} item={item} />
+            ))}
           </div>
-          {isOpen && <p className={`truncate text-2xl`}>React Sandbox</p>}
         </div>
+
+        <a href="https://github.com/hiseanvaldez" target="_blank">
+          <div
+            className="m-4 flex flex-row items-center gap-2"
+            onClick={() => router.push("/")}
+          >
+            <AiOutlineGithub size={24} />
+            <p className={`truncate`}>hiseanvaldez</p>
+          </div>
+        </a>
       </div>
       <div className="flex h-full w-full flex-col">
         <div className="flex w-full items-center py-2">
