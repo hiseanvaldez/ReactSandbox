@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { BsTrash } from "react-icons/bs";
 import Button from "../components/Button";
 import Container from "../components/Container";
@@ -9,24 +9,11 @@ import { convertSizeUnit } from "../utils/imageUtils";
 const Uploader = () => {
   const imageFormats = ["jpeg", "jpg", "png"];
   const maxFiles = 1;
-  const inputRef = useRef(null);
 
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState("");
   const [image, setImage] = useState();
   const [imageBase64, setImageBase64] = useState();
-
-  useEffect(() => {
-    if (image === (null || undefined)) {
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.readAsDataURL(image);
-    reader.onloadend = (e) => {
-      setImageBase64(e.target.result);
-    };
-  }, [image]);
 
   const handleEvents = (e) => {
     e.preventDefault();
@@ -35,7 +22,7 @@ const Uploader = () => {
 
   const handleClick = () => {
     setError("");
-    inputRef.current?.click();
+    document.getElementById("fileInput").click();
   };
 
   const handleDragEnter = (e) => {
@@ -56,17 +43,25 @@ const Uploader = () => {
     setError("");
   };
 
+  const getBase64 = (image) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(image);
+    reader.onloadend = (e) => {
+      setImageBase64(e.target.result);
+    };
+  };
+
   const handleDrop = (e) => {
     handleEvents(e);
     setDragging(false);
     setError("");
 
-    const validFile = validateFiles([...e.dataTransfer.files]);
-
-    if (error) {
+    if (!validateFiles([...e.dataTransfer.files])) {
       return;
     }
-    setImage(validFile);
+
+    setImage(e.dataTransfer.files[0]);
+    getBase64(e.dataTransfer.files[0]);
   };
 
   const handleFileChange = (e) => {
@@ -74,12 +69,12 @@ const Uploader = () => {
       return;
     }
 
-    const validFile = validateFiles([...e.target.files]);
-
-    if (error) {
+    if (!validateFiles([...e.target.files])) {
       return;
     }
-    setImage(validFile);
+
+    setImage(e.target.files[0]);
+    getBase64(e.target.files[0]);
   };
 
   const validateFiles = (files) => {
@@ -89,7 +84,7 @@ const Uploader = () => {
           maxFiles !== 1 ? "s" : ""
         } can be uploaded at a time.`
       );
-      return;
+      return false;
     }
 
     if (
@@ -100,31 +95,49 @@ const Uploader = () => {
       setError(
         `Only following file formats are acceptable: ${imageFormats.join(", ")}`
       );
-      return;
+      return false;
     }
 
     if (files[0].size > 5242880) {
       setError(`Image exceeds 5MB.`);
-      return;
+      return false;
     }
 
-    return files[0];
+    return true;
   };
 
   return (
     <Container>
       <input
-        ref={inputRef}
+        id="fileInput"
         type="file"
         onChange={handleFileChange}
         className="hidden"
+        accept="image/jpeg, image/png"
       />
-      <div
-        onDragOver={handleDragOver}
-        onDragEnter={handleDragEnter}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        className={`
+      {image ? (
+        <div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt="image"
+            src={URL.createObjectURL(image)}
+            className="
+              w[480px] 
+              flex
+              h-80
+              w-[480px]
+              rounded-lg
+              object-cover
+            "
+          />
+        </div>
+      ) : (
+        <div
+          onDragOver={handleDragOver}
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          className={`
           flex
           h-80
           w-[480px]
@@ -138,11 +151,12 @@ const Uploader = () => {
           ${dragging && "bg-blue-300/70"}
           ${error ? "border-red-600" : "border-blue-600"}
         `}
-      >
-        <p>Drag your image here.</p>
-        <p>or</p>
-        <Button label="Select a file" onClick={handleClick} />
-      </div>
+        >
+          <p>Drag your image here.</p>
+          <p>or</p>
+          <Button label="Select a file" onClick={handleClick} />
+        </div>
+      )}
       {error && <p className="text-red-600">{error}</p>}
       {image && (
         <div className="mt-4 flex flex-col gap-4">
@@ -158,16 +172,6 @@ const Uploader = () => {
             <p>{image?.name}</p>
             <p>{convertSizeUnit(image?.size)}</p>
           </div>
-          {imageBase64 && (
-            <div
-              className="
-              flex
-              w-[480px]
-            "
-            >
-              <img alt="image" src={imageBase64} className="w[480px]" />
-            </div>
-          )}
         </div>
       )}
     </Container>
