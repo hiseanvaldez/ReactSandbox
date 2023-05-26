@@ -11,9 +11,13 @@ const Input = ({
   return (
     <div className={`flex w-full flex-col ${label ? "my-3" : "my-0"}`}>
       {label && (
-        <label htmlFor={field.name} className="mb-2 text-sm">
+        <label
+          htmlFor={field.name}
+          class={`mb-2 text-sm font-medium text-slate-700 ${
+            required && "after:ml-0.5 after:text-red-500 after:content-['*']"
+          }`}
+        >
           {label}
-          {required && <span className="font-bold text-red-500">*</span>}
         </label>
       )}
       <div
@@ -36,6 +40,7 @@ const Input = ({
       >
         {currency && <div className="pl-4 text-slate-400">{currency}</div>}
         <input
+          title={label}
           type="text"
           {...field}
           {...props}
