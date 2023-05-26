@@ -79,7 +79,7 @@ const FormikTest = () => {
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
-          {(formik) => {
+          {({ values, errors, touched, setFieldTouched, setFieldValue }) => {
             return (
               <Form>
                 <Field
@@ -106,12 +106,12 @@ const FormikTest = () => {
                   name="occupation"
                   label="Occupation"
                   options={occupations}
-                  value={formik.values.occupation}
-                  errors={formik.errors}
-                  touched={formik.touched}
-                  onBlur={() => formik.setTouched({ occupation: true }, true)}
+                  value={values.occupation}
+                  errors={errors}
+                  touched={touched}
+                  onBlur={() => setFieldTouched("occupation", true, true)}
                   onSelect={(value) =>
-                    formik.setFieldValue("occupation", value.label, true)
+                    setFieldValue("occupation", value.label, true)
                   }
                 />
                 <Button type="submit" label="Validate" onClick={handleSubmit} />

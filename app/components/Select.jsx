@@ -136,7 +136,7 @@ const Select = ({
                   hover:bg-yellow-500
                   ${selectedValue === option ? "font-bold" : "font-normal"}
                 `}
-                onClick={() => {
+                onMouseDown={() => {
                   setIsOpen(false);
                   handleSelect(option);
                 }}
