@@ -14,7 +14,7 @@ const Select = ({
   onBlur,
   onSelect,
 }) => {
-  const selectedValue = options.find((option) => value === option.label) || {
+  const selectedValue = options.find((option) => value === option.value) || {
     label: "",
     value: "",
   };
@@ -133,7 +133,8 @@ const Select = ({
                   text-sm
                   text-gray-700
                   last:border-b-0
-                  hover:bg-yellow-500
+                  hover:bg-blue-500
+                  hover:text-white
                   ${selectedValue === option ? "font-bold" : "font-normal"}
                 `}
                 onMouseDown={() => {

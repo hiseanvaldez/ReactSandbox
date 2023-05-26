@@ -13,7 +13,7 @@ const Input = ({
       {label && (
         <label
           htmlFor={field.name}
-          class={`mb-2 text-sm font-medium text-slate-700 ${
+          className={`mb-2 text-sm font-medium text-slate-700 ${
             required && "after:ml-0.5 after:text-red-500 after:content-['*']"
           }`}
         >

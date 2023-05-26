@@ -53,6 +53,14 @@ const occupations = [
 ];
 
 const FormikTest = () => {
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    allowance: "",
+    occupation: "",
+  };
+
   const validationSchema = object().shape({
     firstName: string().required(),
     lastName: string().required(),
@@ -69,13 +77,7 @@ const FormikTest = () => {
     <Container>
       <div className="flex h-full flex-col justify-between">
         <Formik
-          initialValues={{
-            firstName: "",
-            lastName: "",
-            email: "",
-            allowance: "",
-            occupation: "",
-          }}
+          initialValues={initialValues}
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
