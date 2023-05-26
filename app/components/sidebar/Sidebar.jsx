@@ -14,6 +14,10 @@ const items = [
     title: "Image Uploader",
     route: "/uploader",
   },
+  {
+    title: "Formik",
+    route: "/formik",
+  },
 ];
 
 const Sidebar = ({ children }) => {
@@ -76,7 +80,7 @@ const Sidebar = ({ children }) => {
             )}
           </button>
         </div>
-        <div>{children}</div>
+        <>{children}</>
       </div>
     </div>
   );
