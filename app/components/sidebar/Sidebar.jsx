@@ -18,6 +18,10 @@ const items = [
     title: "Formik",
     route: "/formik",
   },
+  {
+    title: "Progress Bar",
+    route: "/progressbar",
+  },
 ];
 
 const Sidebar = ({ children }) => {
