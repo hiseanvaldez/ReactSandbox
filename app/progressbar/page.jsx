@@ -8,7 +8,7 @@ import ProgressBar from "../components/ProgressBar";
 const ProgressBarTest = () => {
   const steps = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"];
 
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
 
   return (
     <Container>
