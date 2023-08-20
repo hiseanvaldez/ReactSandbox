@@ -1,7 +1,7 @@
-import { Analytics } from "@vercel/analytics/react";
 import { Montserrat } from "next/font/google";
 import Sidebar from "./components/sidebar/Sidebar";
 import "./globals.css";
+import Provider from "./redux/Provider";
 
 export const metadata = {
   title: "Next/React Sandbox",
@@ -15,10 +15,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={font.className}>
-        <Analytics />
-        <div className="flex min-h-screen flex-row">
-          <Sidebar>{children}</Sidebar>
-        </div>
+        <Provider>
+          {/* <Analytics /> */}
+          <div className="flex min-h-screen flex-row">
+            <Sidebar>{children}</Sidebar>
+          </div>
+        </Provider>
       </body>
     </html>
   );

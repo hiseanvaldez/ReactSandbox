@@ -57,7 +57,6 @@ const Input = ({
           "
         />
       </div>
-
       {touched[field.name] && errors[field.name] && (
         <div className="mb-2 flex items-center gap-1 text-sm text-red-500">
           <MdInfo />

@@ -1,10 +1,13 @@
-const Button = ({ label, type = "button", onClick }) => {
+const Button = ({ label, type = "button", onClick, disabled }) => {
   return (
     <button
       type={type}
       title={label}
       onClick={() => onClick()}
-      className="rounded-lg bg-blue-400 p-4 text-white"
+      className={`h-[50px] rounded-lg p-4 text-white ${
+        disabled ? "cursor-not-allowed bg-gray-200" : "bg-blue-400"
+      }`}
+      disabled={disabled}
     >
       {label}
     </button>

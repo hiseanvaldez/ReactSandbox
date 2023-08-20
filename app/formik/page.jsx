@@ -116,7 +116,7 @@ const FormikTest = () => {
                     setFieldValue("occupation", value.label, true)
                   }
                 />
-                <Button type="submit" label="Validate" onClick={handleSubmit} />
+                <Button type="submit" label="Validate" />
               </Form>
             );
           }}

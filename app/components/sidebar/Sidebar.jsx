@@ -22,6 +22,10 @@ const items = [
     title: "Progress Bar",
     route: "/progressbar",
   },
+  {
+    title: "PokéAPI",
+    route: "/pokeapi",
+  },
 ];
 
 const Sidebar = ({ children }) => {
@@ -43,7 +47,7 @@ const Sidebar = ({ children }) => {
           transition-all
           duration-500
           ease-in-out
-          ${isOpen ? "w-[300px]" : "w-0"}
+          ${isOpen ? "max-w-[300px]" : "max-w-0"}
         `}
       >
         <div>
@@ -67,7 +71,7 @@ const Sidebar = ({ children }) => {
             onClick={() => router.push("/")}
           >
             <AiOutlineGithub size={24} />
-            <p className={`truncate`}>hiseanvaldez</p>
+            <p className="truncate">hiseanvaldez</p>
           </div>
         </a>
       </div>
