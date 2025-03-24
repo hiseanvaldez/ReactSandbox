@@ -26,6 +26,10 @@ const items = [
     title: "PokéAPI",
     route: "/pokeapi",
   },
+  {
+    title: "Tree Component",
+    route: "/tree",
+  },
 ];
 
 const Sidebar = ({ children }) => {

@@ -1,0 +1,20 @@
+.children-container {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.children-container.expanded {
+  max-height: 500px; /* Large enough to fit child nodes */
+  opacity: 1;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.arrow.rotate {
+  transform: rotate(90deg);
+}
