@@ -11,6 +11,10 @@ import MenuItem from "./MenuItem";
 
 const items = [
   {
+    title: "Queens",
+    route: "/queens",
+  },
+  {
     title: "Image Uploader",
     route: "/uploader",
   },
@@ -62,11 +66,13 @@ const Sidebar = ({ children }) => {
             <AiFillHome size={24} />
             <p className={`truncate text-2xl font-semibold`}>React Sandbox</p>
           </button>
-          <div className="my-4 flex flex-col justify-center">
-            {items.map((item, idx) => (
-              <MenuItem key={idx} item={item} />
-            ))}
-          </div>
+          {isOpen && (
+            <div className="my-4 flex flex-col justify-center">
+              {items.map((item, idx) => (
+                <MenuItem key={idx} item={item} />
+              ))}
+            </div>
+          )}
         </div>
 
         <a href="https://github.com/hiseanvaldez" target="_blank">
