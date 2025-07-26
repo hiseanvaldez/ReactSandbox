@@ -33,7 +33,7 @@ const typeColor = {
   fairy: "#f1a8f1",
 };
 
-const page = () => {
+const PokeAPI = () => {
   const [trigger, { data, isLoading, error }] = useLazyGetPokemonByNameQuery();
 
   const initialValues = {
@@ -137,4 +137,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default PokeAPI;

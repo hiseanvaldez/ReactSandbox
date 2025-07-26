@@ -6,7 +6,7 @@ import Container from "../components/Container";
 import { useLazyGetPuzzleQuery } from "../redux/services/queensApi";
 import QueensGrid from "./QueensGrid";
 
-const page = () => {
+const Queens = () => {
   const [fetchPuzzle, { data, isLoading, error }] = useLazyGetPuzzleQuery();
 
   const getRandomSize = () => {
@@ -33,4 +33,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Queens;
