@@ -1,4 +1,4 @@
-import { Color } from "../constants/colors";
+import { Color } from "../constants/puzzle";
 
 export type Block = [number, number];
 
@@ -14,3 +14,5 @@ export interface Hive {
   blocks: Block[];
   queen: Block;
 }
+
+export type CellState = "empty" | "threatened" | "occupied";
